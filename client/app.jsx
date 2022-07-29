@@ -25,7 +25,6 @@ export default class App extends React.Component {
     } else {
       this.setState({ mobile: false });
     }
-    // this.setState({ width: windowWidth });
     const { latitude, longitude, mobile } = this.state;
     const contextValue = { latitude, longitude, mobile };
     return (

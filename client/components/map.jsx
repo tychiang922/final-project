@@ -37,13 +37,3 @@ export default class Map extends React.Component {
   }
 }
 Map.contextType = AppContext;
-// export default function Map(props) {
-//   const center = useMemo(() => ({ lat: 44, lng: -80 }), []);
-//   return <GoogleMap
-//   zoom={15}
-//   center={center}
-//   mapContainerClassName="map-container"
-//   options={{ mapId: 'c3caed1a16123b9f' }}>
-//     <Marker position={center} />
-//   </GoogleMap>;
-// }
