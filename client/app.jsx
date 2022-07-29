@@ -16,15 +16,15 @@ export default class App extends React.Component {
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({ longitude: position.coords.longitude, latitude: position.coords.latitude });
     });
-  }
-
-  render() {
     const { innerWidth: windowWidth } = window;
     if (windowWidth < 600) {
       this.setState({ mobile: true });
     } else {
       this.setState({ mobile: false });
     }
+  }
+
+  render() {
     const { latitude, longitude, mobile } = this.state;
     const contextValue = { latitude, longitude, mobile };
     return (
