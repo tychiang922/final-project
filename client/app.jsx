@@ -7,7 +7,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       longitude: null,
-      latitude: null
+      latitude: null,
+      mobile: null
     };
   }
 
@@ -18,8 +19,15 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { latitude, longitude } = this.state;
-    const contextValue = { latitude, longitude };
+    const { innerWidth: windowWidth } = window;
+    if (windowWidth < 600) {
+      this.setState({ mobile: true });
+    } else {
+      this.setState({ mobile: false });
+    }
+    // this.setState({ width: windowWidth });
+    const { latitude, longitude, mobile } = this.state;
+    const contextValue = { latitude, longitude, mobile };
     return (
       <AppContext.Provider value={contextValue}>
         <>

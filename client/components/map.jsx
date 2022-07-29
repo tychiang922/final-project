@@ -11,7 +11,7 @@ let defaultLocation = { lat: 40.756795, lng: -73.954298 };
 
 export default class Map extends React.Component {
   render() {
-    const { latitude, longitude } = this.context;
+    const { latitude, longitude, mobile } = this.context;
     if (latitude && longitude) {
       defaultLocation = { lat: latitude, lng: longitude };
     }
@@ -21,8 +21,13 @@ export default class Map extends React.Component {
           <GoogleMap
             center={defaultLocation}
             zoom={15}
-            options={{ mapId: 'c3caed1a16123b9f' }}
-            mapContainerStyle={{ height: '100vh', width: '100%' }}
+            options={{
+              mapId: 'c3caed1a16123b9f',
+              mapTypeControl: false,
+              zoomControl: !mobile,
+              disableDefaultUI: true
+            }}
+            mapContainerClassName='map-container'
           >
             <Marker position={defaultLocation} />
           </GoogleMap>
