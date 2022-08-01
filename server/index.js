@@ -20,16 +20,18 @@ app.get('/api/hello', (req, res) => {
 });
 
 app.get('/api/nearby', (req, res, next) => {
+  const { lat, lng } = req.query;
   client.search({
     term: 'restaurant',
-    latitude: 33.6349171,
-    longitude: -117.7405465,
+    latitude: lat,
+    longitude: lng,
     radius: 1000
   })
-    .then(res => res.json(res))
-    .then(data => res.json(data))
+    .then(response => {
+      res.json(response);
+    }).then(data => res.json(data))
     .catch(e => {
-      res.status(404);
+      res.status(400);
     });
 });
 
