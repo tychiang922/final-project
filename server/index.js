@@ -25,7 +25,7 @@ app.get('/api/nearby', (req, res, next) => {
     term: 'restaurant',
     latitude: lat,
     longitude: lng,
-    radius: 1000
+    radius: 2000
   })
     .then(response => {
       res.json(response);
