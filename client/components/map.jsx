@@ -18,9 +18,16 @@ export default class Map extends React.Component {
 
   renderMarkers() {
     if (this.state.latitude || this.state.longitude) {
+      const iconMarker = new window.google.maps.MarkerImage(
+        'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+        null,
+        null,
+        null,
+        new window.google.maps.Size(50, 50)
+      );
       return this.state.places.map((value, id) => {
         defaultLocation = { lat: value.coordinates.latitude, lng: value.coordinates.longitude };
-        return <Marker key={value.id} position={defaultLocation} />;
+        return <Marker icon={ iconMarker }key={value.id} position={defaultLocation} />;
       });
     } else {
       return null;
