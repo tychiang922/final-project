@@ -22,6 +22,7 @@ app.get('/api/nearby', (req, res, next) => {
   const { lat, lng } = req.query;
   client.search({
     term: 'restaurant',
+    category: 'food',
     latitude: lat,
     longitude: lng,
     radius: 2000
