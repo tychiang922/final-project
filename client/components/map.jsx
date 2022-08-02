@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const id = ['c3caed1a16123b9f'];
-const key = 'AIzaSyCn2kPCBIEv3Tkz2pI-W88ra2TeqHqdxfo';
+const key = process.env.MAPS_API_KEY;
 let defaultLocation = { lat: 40.756795, lng: -73.954298 };
 
 export default class Map extends React.Component {

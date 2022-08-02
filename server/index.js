@@ -1,7 +1,6 @@
-'use strict';
-const yelp = require('yelp-fusion');
-const client = yelp.client('hQ9kH-rRd1q7AZRXFbMsJDLWlFrA_UpNw4NW6rHAq4eksdlkNrwQE0iwnWQ704F-3Or8Hc0y6eUOJN2WyM95NP-1AJqu8bwQrxM7szpPocEsuvXt3qyUEK4D4PDaYnYx');
 require('dotenv/config');
+const yelp = require('yelp-fusion');
+const client = yelp.client(process.env.YELP_API_KEY);
 const path = require('path');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
