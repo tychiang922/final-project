@@ -51,6 +51,8 @@ module.exports = {
   devtool: isDevelopment ? 'cheap-module-source-map' : 'source-map',
   plugins: [
     new webpack.EnvironmentPlugin([]),
+    new webpack.EnvironmentPlugin(['YELP_API_KEY']),
+    new webpack.EnvironmentPlugin(['MAPS_API_KEY']),
     isDevelopment && new ReactRefreshWebpackPlugin(),
     isDevelopment && new webpack.NoEmitOnErrorsPlugin(),
     isDevelopment && new webpack.HotModuleReplacementPlugin()

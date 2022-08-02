@@ -1,4 +1,6 @@
 require('dotenv/config');
+const yelp = require('yelp-fusion');
+const client = yelp.client(process.env.YELP_API_KEY);
 const path = require('path');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
@@ -14,6 +16,22 @@ if (process.env.NODE_ENV === 'development') {
 
 app.get('/api/hello', (req, res) => {
   res.json({ hello: 'world' });
+});
+
+app.get('/api/nearby', (req, res, next) => {
+  const { lat, lng } = req.query;
+  client.search({
+    term: 'restaurant',
+    latitude: lat,
+    longitude: lng,
+    radius: 2000
+  })
+    .then(response => {
+      res.json(response);
+    }).then(data => res.json(data))
+    .catch(e => {
+      res.status(400);
+    });
 });
 
 app.use(errorMiddleware);
