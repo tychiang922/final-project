@@ -29,7 +29,9 @@ app.get('/yelp/nearby', (req, res, next) => {
   })
     .then(response => {
       res.json(response);
-    }).then(data => res.json(data))
+    }).then(data => {
+      res.json(data);
+    })
     .catch(e => {
       res.status(400);
     });

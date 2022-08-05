@@ -1,26 +1,22 @@
 import React from 'react';
+import Home from '../pages/home';
 
 export default class MobileNavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      category: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
 
-  handleChange(event) {
-    const { value } = event.target;
-    this.setState({ category: value });
-  }
+  // handleChange(event) {
+  //   const { value } = event.target;
+  //   this.setState({ category: value });
+  // }
 
-  handleSubmit(event) {
-    event.preventDefault();
-  }
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   const { value } = event.target;
+  //   this.setState({ category: value });
+  // }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={Home.handleSubmit}>
         <div>
           <div className="card" style={{
             width: '100%',
@@ -59,7 +55,7 @@ export default class MobileNavBar extends React.Component {
                   placeholder="Search Categories"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
-                  onChange={this.handleChange}
+                  onChange={Home.handleChange}
                   style={{
                     border: 'none',
                     backgroundColor: '#182430',
