@@ -30,7 +30,7 @@ app.get('/yelp/nearby', (req, res, next) => {
     .then(response => {
       res.json(response);
     }).then(data => {
-      res.json(data);
+      res.status(200).json(data);
     })
     .catch(e => {
       res.status(400);

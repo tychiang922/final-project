@@ -10,8 +10,10 @@ export default class Home extends React.Component {
     this.state = {
       userLongitude: null,
       userLatitude: null,
-      category: '',
-      places: []
+      userCategoryInput: '',
+      userCategorySubmit: '',
+      places: [],
+      isLoading: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,11 +21,21 @@ export default class Home extends React.Component {
 
   async yelpFetch() {
     if (this.state.places.length === 0) {
-      const { userLatitude, userLongitude, category } = this.state;
-      const yelp = await getYelp(userLatitude, userLongitude, category);
-      this.setState({
-        places: yelp
-      });
+      let { userLatitude, userLongitude, userCategorySubmit } = this.state;
+      if (userCategorySubmit === undefined) {
+        userCategorySubmit = 'food';
+      }
+      const yelp = await getYelp(userLatitude, userLongitude, userCategorySubmit);
+      if (yelp.length === 0) {
+        this.setState({
+          places: ['placeholder']
+        });
+      } else {
+        this.setState({
+          places: yelp,
+          isLoading: false
+        });
+      }
     } else {
       return null;
     }
@@ -31,13 +43,20 @@ export default class Home extends React.Component {
 
   handleChange(event) {
     const { value } = event.target;
-    this.setState({ category: value });
+    this.setState({
+      userCategoryInput: value
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const { value } = event.target;
-    this.setState({ category: value });
+    const catInput = this.state.userCategoryInput;
+    this.setState({
+      userCategorySubmit: catInput,
+      places: [],
+      isLoading: true,
+      userCategoryInput: ''
+    });
   }
 
   locate() {
@@ -50,15 +69,26 @@ export default class Home extends React.Component {
 
   render() {
     this.locate();
-    const { yelpFetch } = this;
-    const contextValue = { yelpFetch };
+    this.yelpFetch();
+    const { handleSubmit, handleChange, yelpFetch } = this;
+    const { userLongitude, userLatitude, userCategorySubmit, places, isLoading } = this.state;
+    const contextValue = { handleSubmit, handleChange, yelpFetch, userLongitude, userLatitude, userCategorySubmit, places, isLoading };
+    // if (places.length === 0) {
+    //   return (
+    //     <div>
+    //       <p>Loading...</p>
+    //     </div>
+    //   );
+    // }
     return (
       <AppContext.Provider value={contextValue}>
         <>
-          <Map latitude={this.state.userLatitude} longitude={this.state.userLongitude} places={this.props.places} />
+          <Map />
           <MobileNavBar />
         </>
       </AppContext.Provider>
     );
   }
 }
+
+Home.contextType = AppContext;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../pages/home';
+import AppContext from '../lib/app-context';
 
 export default class MobileNavBar extends React.Component {
 
@@ -15,8 +15,8 @@ export default class MobileNavBar extends React.Component {
   // }
 
   render() {
+    const { handleSubmit, handleChange } = this.context;
     return (
-      <form onSubmit={Home.handleSubmit}>
         <div>
           <div className="card" style={{
             width: '100%',
@@ -38,6 +38,7 @@ export default class MobileNavBar extends React.Component {
                   backgroundColor: '#525D68'
                 }}></a>
               </div>
+            <form onSubmit={handleSubmit}>
               <div className="input-group mb-3 ">
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1" style={{
@@ -55,21 +56,21 @@ export default class MobileNavBar extends React.Component {
                   placeholder="Search Categories"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
-                  onChange={Home.handleChange}
+                  onChange={handleChange}
                   style={{
                     border: 'none',
                     backgroundColor: '#182430',
                     borderRadius: '0 10px 10px 0'
                   }} />
               </div>
+            </form>
             </div>
           </div>
         </div>
-      </form>
     );
   }
 }
-
+MobileNavBar.contextType = AppContext;
 // export class DesktopNavBar extends React.Component {
 //   render() {
 //     return (

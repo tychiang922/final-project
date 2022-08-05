@@ -1,17 +1,18 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import RenderMarkers from './marker-render';
+import AppContext from '../lib/app-context';
 
 const id = ['c3caed1a16123b9f'];
 const key = process.env.MAPS_API_KEY;
 
 export default class Map extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      test: true
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     test: true
+  //   };
+  // }
 
   // renderMarkers() {
   //   if (this.state.latitude || this.state.longitude) {
@@ -68,10 +69,10 @@ export default class Map extends React.Component {
 
   render() {
     // this.locate();
-    const { latitude, longitude } = this.props;
+    const { userLatitude, userLongitude } = this.context;
     let defaultLocation = { lat: 40.756795, lng: -73.954298 };
-    if (latitude || longitude) {
-      defaultLocation = { lat: latitude, lng: longitude };
+    if (userLatitude || userLongitude) {
+      defaultLocation = { lat: userLatitude, lng: userLongitude };
     }
     return (
       <LoadScript googleMapsApiKey={key} mapIds={id} >
@@ -87,9 +88,11 @@ export default class Map extends React.Component {
           mapContainerClassName='map-container'
         >
           <Marker position={defaultLocation} />
-          <RenderMarkers places={this.props.places} />
+          <RenderMarkers />
         </GoogleMap>
       </LoadScript>
     );
   }
 }
+
+Map.contextType = AppContext;
