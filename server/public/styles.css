@@ -44,8 +44,13 @@ body {
     transition: all 0.5s ease-in-out;
   }
 
-  .desk-card.desk-card-active {
+  .desk-card-active {
     width: 30rem !important;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .desk-card-unactive {
+    width: 5rem !important;
     transition: all 0.5s ease-in-out;
   }
 
@@ -68,26 +73,46 @@ body {
     transition: all 0.5s ease-in-out;
   }
 
-  .desk-search-icon.dsi-active {
+  .dsi-active {
     background-color: white !important;
     font-size: 16px !important;
     padding: 6px 12px !important;
     transition: all 0.5s ease-in-out;
   }
 
-  .desk-search-icon-color.dsic-active {
+  .dsi-unactive {
+    background-color: #11314f !important;
+    font-size: 2.75rem !important;
+    padding: 0 !important;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .dsic-active {
     color: black;
     padding: 6px, 12px !important;
     transition: all 0.5s ease-in-out;
   }
 
-  .opac {
-    opacity: 0 !important;
+  .dsic-unactive {
+    color: white;
     transition: all 0.5s ease-in-out;
   }
 
-  .opac.opac-active {
+  .opac {
+    opacity: 0 !important;
+    height: 66px !important;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .opac-active {
     opacity: 1 !important;
+    height: 36px !important;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .opac.opac-unactive {
+    opacity: 0 !important;
+    height: 66px !important;
     transition: all 0.5s ease-in-out;
   }
 }

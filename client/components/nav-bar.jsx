@@ -83,14 +83,14 @@ export class DesktopNavBar extends React.Component {
         overflow: 'visible'
       }}>
           <form onSubmit={this.props.onSubmit}>
-            <div className= {`input-group mb-3 desk-card ${this.state.searchActive ? 'desk-card-active' : ''}`} style={{
-              paddingTop: '2rem',
-              paddingLeft: '1rem'
-            }}>
+          <div className={`input-group mb-3 desk-card ${this.state.searchActive ? 'desk-card-active' : 'desk-card-active desk-card-unactive'}`} style={{
+            paddingTop: '2rem',
+            paddingLeft: '1rem'
+          }}>
               <div className="input-group-prepend ">
                 <span className={`input-group-text desk-search-icon ${this.state.searchActive
                       ? 'dsi-active'
-                      : ''}`}
+                      : 'dsi-active dsi-unactive'}`}
                       id="basic-addon1" style={{
                         border: 'none',
                         borderRadius: '10px 0 0 10px'
@@ -98,14 +98,14 @@ export class DesktopNavBar extends React.Component {
                   <a className="nav-link pad-0" href="#" onClick={this.toggle}>
                     <i className={`fa-solid fa-magnifying-glass desk-search-icon-color ${this.state.searchActive
                       ? 'dsic-active'
-                      : ''}`}></i>
+                      : 'dsic-unactive'}`}></i>
                   </a>
                 </span>
               </div>
               <input
                 required
                 type="text"
-                className={`form-control opac ${this.state.searchActive ? 'opac-active' : ''}`}
+                className={`form-control opac ${this.state.searchActive ? 'opac-active' : 'opac-active opac-unactive'}`}
                 placeholder="Search Categories"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
