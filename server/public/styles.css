@@ -1,3 +1,15 @@
+.hidden {
+  display: none !important;
+}
+
+.pos-abs {
+  position: absolute !important;
+}
+
+.pad-0 {
+  padding: 0 !important;
+}
+
 body {
   height: 100vh;
   overflow: hidden;
@@ -8,9 +20,61 @@ body {
   height: 100vh;
 }
 
+.mob-nav-pos {
+  position: absolute !important;
+  top: 85%;
+}
+
+.desk-nav-pos {
+  display: none;
+}
+
 @media screen and (min-width: 500px) {
   .map-container {
     width: 100%;
     height: 100vh;
+  }
+
+  .mob-nav-pos {
+    display: none !important;
+  }
+
+  .desk-card {
+    width: 5rem !important;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .desk-card-active {
+    width: 30rem !important;
+  }
+
+  .desk-nav-pos {
+    display: block;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+  }
+
+  .desk-search-icon {
+    background-color: #11314f !important;
+    font-size: 2.75rem !important;
+    padding: 0 !important;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .desk-search-icon-color {
+    color: white;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .dsi-active {
+    background-color: white !important;
+    font-size: 16px !important;
+    padding: 6px 12px !important;
+  }
+
+  .dsic-active {
+    color: black;
+    padding: 6px, 12px !important;
   }
 }

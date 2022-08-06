@@ -18,7 +18,7 @@ export default class MobileNavBar extends React.Component {
     const { handleSubmit, handleChange } = this.context;
     return (
         <div>
-          <div className="card" style={{
+          <div className="card mob-nav-pos" style={{
             width: '100%',
             borderRadius: '21px 21px 0 0',
             height: '900px',
@@ -38,48 +38,100 @@ export default class MobileNavBar extends React.Component {
                   backgroundColor: '#525D68'
                 }}></a>
               </div>
-            <form onSubmit={handleSubmit}>
-              <div className="input-group mb-3 ">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1" style={{
-                    border: 'none',
-                    backgroundColor: '#182430',
-                    borderRadius: '10px 0 0 10px'
-                  }}>
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                  </span>
+              <form onSubmit={handleSubmit}>
+                <div className="input-group mb-3 ">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1" style={{
+                      border: 'none',
+                      backgroundColor: '#182430',
+                      borderRadius: '10px 0 0 10px'
+                    }}>
+                      <i className="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                  </div>
+                  <input
+                    required
+                    type="text"
+                    className="form-control"
+                    placeholder="Search Categories"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onChange={handleChange}
+                    style={{
+                      border: 'none',
+                      backgroundColor: '#182430',
+                      borderRadius: '0 10px 10px 0'
+                    }} />
                 </div>
-                <input
-                  required
-                  type="text"
-                  className="form-control"
-                  placeholder="Search Categories"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                  onChange={handleChange}
-                  style={{
-                    border: 'none',
-                    backgroundColor: '#182430',
-                    borderRadius: '0 10px 10px 0'
-                  }} />
-              </div>
-            </form>
+              </form>
             </div>
           </div>
         </div>
     );
   }
 }
+
+export class DesktopNavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchActive: false
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      searchActive: !prevState.searchActive
+    }));
+  }
+
+  render() {
+    return (
+      <nav className="nav flex-column desk-nav-pos" style={{
+        backgroundColor: '#11314F',
+        height: '100vh',
+        width: '5rem',
+        overflow: 'visible'
+      }}>
+          <form >
+            <div className= {`input-group mb-3 desk-card ${this.state.searchActive ? 'desk-card-active' : ''}`} style={{
+              paddingTop: '2rem',
+              paddingLeft: '1rem'
+            }}>
+              <div className="input-group-prepend ">
+                <span className={`input-group-text desk-search-icon ${this.state.searchActive
+                      ? 'dsi-active'
+                      : ''}`}
+                      id="basic-addon1" style={{
+                        border: 'none',
+                        borderRadius: '10px 0 0 10px'
+                      }}>
+                  <a className="nav-link pad-0" href="#" onClick={this.toggle}>
+                    <i className={`fa-solid fa-magnifying-glass desk-search-icon-color ${this.state.searchActive
+                      ? 'dsic-active'
+                      : ''}`}></i>
+                  </a>
+                </span>
+              </div>
+              <input
+                required
+                type="text"
+                className={`form-control ${this.state.searchActive ? '' : 'hidden'}`}
+                placeholder="Search Categories"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                style={{
+                  border: 'none',
+                  backgroundColor: 'white',
+                  borderRadius: '0 10px 10px 0'
+                }} />
+            </div>
+          </form>
+
+      </nav>
+    );
+  }
+}
+
 MobileNavBar.contextType = AppContext;
-// export class DesktopNavBar extends React.Component {
-//   render() {
-//     return (
-//       <nav className="nav flex-column">
-//         <a className="nav-link active" href="#">Active</a>
-//         <a className="nav-link" href="#">Link</a>
-//         <a className="nav-link" href="#">Link</a>
-//         <a className="nav-link disabled" href="#">Disabled</a>
-//       </nav>
-//     );
-//   }
-// }

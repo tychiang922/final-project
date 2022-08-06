@@ -1,6 +1,6 @@
 import React from 'react';
 import Map from '../components/map.jsx';
-import MobileNavBar from '../components/nav-bar.jsx';
+import { DesktopNavBar } from '../components/nav-bar.jsx';
 import getYelp from '../components/get-yelp.jsx';
 import AppContext from '../lib/app-context';
 
@@ -84,7 +84,7 @@ export default class Home extends React.Component {
       <AppContext.Provider value={contextValue}>
         <>
           <Map />
-          <MobileNavBar />
+          <DesktopNavBar />
         </>
       </AppContext.Provider>
     );
