@@ -77,4 +77,13 @@ body {
     color: black;
     padding: 6px, 12px !important;
   }
+
+  .opac {
+    opacity: 0 !important;
+    transition: all 5s ease-in-out;
+  }
+
+  .opac-active {
+    opacity: 1 !important;
+  }
 }

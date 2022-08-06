@@ -84,7 +84,7 @@ export default class Home extends React.Component {
       <AppContext.Provider value={contextValue}>
         <>
           <Map />
-          <DesktopNavBar />
+          <DesktopNavBar onChange={this.handleChange} onSubmit={this.handleSubmit}/>
         </>
       </AppContext.Provider>
     );

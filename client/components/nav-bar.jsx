@@ -94,7 +94,7 @@ export class DesktopNavBar extends React.Component {
         width: '5rem',
         overflow: 'visible'
       }}>
-          <form >
+          <form onSubmit={this.props.onSubmit}>
             <div className= {`input-group mb-3 desk-card ${this.state.searchActive ? 'desk-card-active' : ''}`} style={{
               paddingTop: '2rem',
               paddingLeft: '1rem'
@@ -117,10 +117,11 @@ export class DesktopNavBar extends React.Component {
               <input
                 required
                 type="text"
-                className={`form-control ${this.state.searchActive ? '' : 'hidden'}`}
+                className={`form-control opac ${this.state.searchActive ? 'opac-active' : ''}`}
                 placeholder="Search Categories"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
+                onChange={this.props.onChange}
                 style={{
                   border: 'none',
                   backgroundColor: 'white',
