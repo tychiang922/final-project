@@ -2,18 +2,6 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 
 export default class MobileNavBar extends React.Component {
-
-  // handleChange(event) {
-  //   const { value } = event.target;
-  //   this.setState({ category: value });
-  // }
-
-  // handleSubmit(event) {
-  //   event.preventDefault();
-  //   const { value } = event.target;
-  //   this.setState({ category: value });
-  // }
-
   render() {
     const { handleSubmit, handleChange } = this.context;
     return (

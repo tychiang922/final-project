@@ -1,6 +1,6 @@
 import React from 'react';
 import Map from '../components/map.jsx';
-import { DesktopNavBar } from '../components/nav-bar.jsx';
+import MobileNavBar, { DesktopNavBar } from '../components/nav-bar.jsx';
 import getYelp from '../components/get-yelp.jsx';
 import AppContext from '../lib/app-context';
 
@@ -63,6 +63,12 @@ export default class Home extends React.Component {
     if (!this.state.userLatitude) {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({ userLongitude: position.coords.longitude, userLatitude: position.coords.latitude });
+        const { innerWidth: windowWidth } = window;
+        if (windowWidth < 600) {
+          this.setState({ mobile: true });
+        } else {
+          this.setState({ mobile: false });
+        }
       });
     }
   }
@@ -73,18 +79,12 @@ export default class Home extends React.Component {
     const { handleSubmit, handleChange, yelpFetch } = this;
     const { userLongitude, userLatitude, userCategorySubmit, places, isLoading } = this.state;
     const contextValue = { handleSubmit, handleChange, yelpFetch, userLongitude, userLatitude, userCategorySubmit, places, isLoading };
-    // if (places.length === 0) {
-    //   return (
-    //     <div>
-    //       <p>Loading...</p>
-    //     </div>
-    //   );
-    // }
     return (
       <AppContext.Provider value={contextValue}>
         <>
           <Map />
           <DesktopNavBar onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+          <MobileNavBar />
         </>
       </AppContext.Provider>
     );
