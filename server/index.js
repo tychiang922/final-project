@@ -18,17 +18,20 @@ app.get('/api/hello', (req, res) => {
   res.json({ hello: 'world' });
 });
 
-app.get('/api/nearby', (req, res, next) => {
-  const { lat, lng } = req.query;
+app.get('/yelp/nearby', (req, res, next) => {
+  const { lat, lng, category } = req.query;
   client.search({
-    term: 'restaurant',
+    term: category,
+    category: 'food',
     latitude: lat,
     longitude: lng,
-    radius: 2000
+    radius: 1000
   })
     .then(response => {
       res.json(response);
-    }).then(data => res.json(data))
+    }).then(data => {
+      res.status(200).json(data);
+    })
     .catch(e => {
       res.status(400);
     });
