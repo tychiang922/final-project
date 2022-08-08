@@ -17,7 +17,11 @@ export default class RenderMarkers extends React.Component {
     );
     return places.map((value, id) => {
       const defaultLocation = { lat: value.coordinates.latitude, lng: value.coordinates.longitude };
-      return <Marker icon={iconMarker} key={value.id} position={defaultLocation} />;
+      return <Marker icon={iconMarker}
+      key={value.id}
+      position={defaultLocation}
+      animation={window.google.maps.Animation.DROP}
+      />;
     });
   }
 }
