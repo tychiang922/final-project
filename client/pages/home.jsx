@@ -3,6 +3,7 @@ import Map from '../components/map.jsx';
 import MobileNavBar, { DesktopNavBar } from '../components/nav-bar.jsx';
 import getYelp from '../components/get-yelp.jsx';
 import AppContext from '../lib/app-context';
+import Loading from '../components/loading-page.jsx';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -13,8 +14,10 @@ export default class Home extends React.Component {
       userCategoryInput: '',
       userCategorySubmit: '',
       places: [],
-      isLoading: true
+      isLoading: true,
+      searchActive: false
     };
+    this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -28,7 +31,8 @@ export default class Home extends React.Component {
       const yelp = await getYelp(userLatitude, userLongitude, userCategorySubmit);
       if (yelp.length === 0) {
         this.setState({
-          places: ['placeholder']
+          places: ['empty'],
+          isLoading: false
         });
       } else {
         this.setState({
@@ -39,6 +43,12 @@ export default class Home extends React.Component {
     } else {
       return null;
     }
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      searchActive: !prevState.searchActive
+    }));
   }
 
   handleChange(event) {
@@ -55,7 +65,8 @@ export default class Home extends React.Component {
       userCategorySubmit: catInput,
       places: [],
       isLoading: true,
-      userCategoryInput: ''
+      userCategoryInput: '',
+      searchActive: false
     });
   }
 
@@ -63,12 +74,6 @@ export default class Home extends React.Component {
     if (!this.state.userLatitude) {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({ userLongitude: position.coords.longitude, userLatitude: position.coords.latitude });
-        const { innerWidth: windowWidth } = window;
-        if (windowWidth < 600) {
-          this.setState({ mobile: true });
-        } else {
-          this.setState({ mobile: false });
-        }
       });
     }
   }
@@ -76,15 +81,16 @@ export default class Home extends React.Component {
   render() {
     this.locate();
     this.yelpFetch();
-    const { handleSubmit, handleChange, yelpFetch } = this;
-    const { userLongitude, userLatitude, userCategorySubmit, places, isLoading } = this.state;
+    const { handleSubmit, handleChange, yelpFetch, toggle } = this;
+    const { userLongitude, userLatitude, userCategorySubmit, places, isLoading, searchActive } = this.state;
     const contextValue = { handleSubmit, handleChange, yelpFetch, userLongitude, userLatitude, userCategorySubmit, places, isLoading };
     return (
       <AppContext.Provider value={contextValue}>
         <>
           <Map />
-          <DesktopNavBar onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+          <DesktopNavBar onChange={handleChange} onSubmit={handleSubmit} toggle={toggle} searchActive={searchActive}/>
           <MobileNavBar />
+          <Loading isLoading={this.state.isLoading} />
         </>
       </AppContext.Provider>
     );

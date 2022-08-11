@@ -26,8 +26,7 @@ export default class Map extends React.Component {
           }}
           mapContainerClassName='map-container'
         >
-          <Marker position={defaultLocation}
-            animation={window.google.maps.Animation.DROP} />
+          <Marker position={defaultLocation}/>
           <RenderMarkers />
         </GoogleMap>
       </LoadScript>

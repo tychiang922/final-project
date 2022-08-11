@@ -2,6 +2,14 @@
   display: none !important;
 }
 
+.w-100 {
+  width: 100vw !important;
+}
+
+.h-100 {
+  height: 100vh;
+}
+
 .pos-abs {
   position: absolute !important;
 }
@@ -27,6 +35,14 @@ body {
 
 .desk-nav-pos {
   display: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: default;
 }
 
 @media screen and (min-width: 500px) {

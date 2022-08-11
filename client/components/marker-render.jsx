@@ -5,7 +5,7 @@ import AppContext from '../lib/app-context';
 export default class RenderMarkers extends React.Component {
   render() {
     const { places, isLoading } = this.context;
-    if (isLoading !== false) {
+    if (isLoading !== false || places[0] === 'empty') {
       return null;
     }
     const iconMarker = new window.google.maps.MarkerImage(
