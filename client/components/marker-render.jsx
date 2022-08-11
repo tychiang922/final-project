@@ -4,7 +4,7 @@ import AppContext from '../lib/app-context';
 
 export default class RenderMarkers extends React.Component {
   render() {
-    const { places, isLoading } = this.context;
+    const { places, isLoading, getBusinessInfo } = this.context;
     if (isLoading !== false || places[0] === 'empty') {
       return null;
     }
@@ -18,6 +18,18 @@ export default class RenderMarkers extends React.Component {
     return places.map((value, id) => {
       const defaultLocation = { lat: value.coordinates.latitude, lng: value.coordinates.longitude };
       return <Marker icon={iconMarker}
+      onClick={
+        e => {
+          getBusinessInfo(value.id);
+          this.iconMarker = new window.google.maps.MarkerImage(
+            'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+            null,
+            null,
+            null,
+            new window.google.maps.Size(500, 500)
+          );
+        }
+      }
       key={value.id}
       position={defaultLocation}
       animation={window.google.maps.Animation.DROP}

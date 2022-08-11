@@ -1,7 +1,7 @@
 import React from 'react';
 import Map from '../components/map.jsx';
 import MobileNavBar, { DesktopNavBar } from '../components/nav-bar.jsx';
-import getYelp from '../components/get-yelp.jsx';
+import getYelp, { getYelpById } from '../components/get-yelp.jsx';
 import AppContext from '../lib/app-context';
 import Loading from '../components/loading-page.jsx';
 
@@ -15,11 +15,13 @@ export default class Home extends React.Component {
       userCategorySubmit: '',
       places: [],
       isLoading: true,
-      searchActive: false
+      searchActive: false,
+      currentSearch: []
     };
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getBusinessInfo = this.getBusinessInfo.bind(this);
   }
 
   async yelpFetch() {
@@ -43,6 +45,13 @@ export default class Home extends React.Component {
     } else {
       return null;
     }
+  }
+
+  async getBusinessInfo(id) {
+    const businessId = await getYelpById(id);
+    this.setState({
+      currentSearch: businessId.jsonBody
+    });
   }
 
   toggle() {
@@ -81,9 +90,9 @@ export default class Home extends React.Component {
   render() {
     this.locate();
     this.yelpFetch();
-    const { handleSubmit, handleChange, yelpFetch, toggle } = this;
+    const { handleSubmit, handleChange, yelpFetch, toggle, getBusinessInfo } = this;
     const { userLongitude, userLatitude, userCategorySubmit, places, isLoading, searchActive } = this.state;
-    const contextValue = { handleSubmit, handleChange, yelpFetch, userLongitude, userLatitude, userCategorySubmit, places, isLoading };
+    const contextValue = { getBusinessInfo, handleSubmit, handleChange, yelpFetch, userLongitude, userLatitude, userCategorySubmit, places, isLoading };
     return (
       <AppContext.Provider value={contextValue}>
         <>

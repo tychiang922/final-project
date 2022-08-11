@@ -37,6 +37,19 @@ app.get('/yelp/nearby', (req, res, next) => {
     });
 });
 
+app.get('/yelp/business/:id', (req, res, next) => {
+  const businessId = req.params.id;
+  client.business(businessId)
+    .then(response => {
+      res.json(response);
+    }).then(data => {
+      res.status(200).json(data);
+    })
+    .catch(e => {
+      res.status(400);
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
