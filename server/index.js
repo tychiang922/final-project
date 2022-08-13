@@ -22,7 +22,7 @@ app.get('/yelp/nearby', (req, res, next) => {
   const { lat, lng, category } = req.query;
   client.search({
     term: category,
-    category: 'food',
+    category: 'restaurant',
     latitude: lat,
     longitude: lng,
     radius: 1000

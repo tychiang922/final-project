@@ -4,6 +4,7 @@ import MobileNavBar, { DesktopNavBar } from '../components/nav-bar.jsx';
 import getYelp, { getYelpById } from '../components/get-yelp.jsx';
 import AppContext from '../lib/app-context';
 import Loading from '../components/loading-page.jsx';
+import BusinessSearch from '../components/business-search.jsx';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ export default class Home extends React.Component {
 
   async getBusinessInfo(id) {
     const businessId = await getYelpById(id);
+    // console.log(businessId);
     this.setState({
       currentSearch: businessId.jsonBody
     });
@@ -92,7 +94,7 @@ export default class Home extends React.Component {
     this.yelpFetch();
     const { handleSubmit, handleChange, yelpFetch, toggle, getBusinessInfo } = this;
     const { userLongitude, userLatitude, userCategorySubmit, places, isLoading, searchActive } = this.state;
-    const contextValue = { getBusinessInfo, handleSubmit, handleChange, yelpFetch, userLongitude, userLatitude, userCategorySubmit, places, isLoading };
+    const contextValue = { getBusinessInfo, searchActive, handleSubmit, handleChange, yelpFetch, userLongitude, userLatitude, userCategorySubmit, places, isLoading };
     return (
       <AppContext.Provider value={contextValue}>
         <>
@@ -100,6 +102,7 @@ export default class Home extends React.Component {
           <DesktopNavBar onChange={handleChange} onSubmit={handleSubmit} toggle={toggle} searchActive={searchActive}/>
           <MobileNavBar />
           <Loading isLoading={this.state.isLoading} />
+          <BusinessSearch />
         </>
       </AppContext.Provider>
     );

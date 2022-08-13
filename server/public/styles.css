@@ -1,3 +1,16 @@
+* {
+  font-family: Lora, sans-serif;
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23525D68'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.back-gray {
+  background-color: #182430 !important;
+  opacity: 1 !important;
+}
+
 .hidden {
   display: none !important;
 }
@@ -43,6 +56,55 @@ a {
 
 a:hover {
   cursor: default;
+}
+
+.fs-title {
+  font-size: 8px;
+  text-transform: uppercase;
+  border-right: 1px;
+  color: #525d68;
+  font-weight: bolder;
+}
+
+.fs-caption {
+  font-size: 14px;
+  color: white;
+}
+
+.sample-image {
+  height: 110px;
+  width: 110px;
+  border-radius: 8px;
+}
+
+.hours {
+  font-family: Roboto, sans-serif;
+  font-size: 10px;
+  font-weight: bolder;
+  color: #525d68;
+}
+
+.hours-number {
+  font-family: Roboto, sans-serif;
+  font-size: 10px;
+  font-weight: bolder;
+  color: white;
+}
+
+.close {
+  color: red;
+  font-family: Roboto, sans-serif;
+  font-weight: bolder;
+  font-size: 11px;
+}
+
+.open {
+  color: green;
+  font-family:
+    Roboto,
+    sans-serif;
+  font-weight: bolder;
+  font-size: 9px;
 }
 
 @media screen and (min-width: 500px) {
