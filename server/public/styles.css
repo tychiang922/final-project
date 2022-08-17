@@ -2,6 +2,15 @@
   font-family: Lora, sans-serif;
 }
 
+.review-date {
+  font-size: 8px;
+  color: #525d68;
+}
+
+.review-name {
+  font-size: 8px;
+}
+
 .face-img {
   height: 50px;
   width: 50px;
@@ -37,6 +46,10 @@
 
 .h-100 {
   height: 100vh;
+}
+
+.h-100p {
+  height: 100%;
 }
 
 .pos-abs {

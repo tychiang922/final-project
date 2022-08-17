@@ -20,7 +20,6 @@ export default class BusinessSearch extends React.Component {
       }
       return <i key={i} className="fa-solid fa-star text-danger"></i>;
     });
-
   }
 
   render() {
@@ -294,15 +293,15 @@ export default class BusinessSearch extends React.Component {
                   }}>
                     <img src='https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg' className='face-img' />
                   </div>
-                  <div className="d-flex flex-column mb-0">
+                  <div className="d-flex flex-column mb-0 ms-1 mt-1">
                     <div className="p-0">
                       <this.ratingRender />
                     </div>
-                    <div className="d-flex flex-row mb-0 text-white">
-                      <div className="p-0">
-
+                    <div className="d-flex flex-row mb-0 mt-1">
+                      <div className="p-0 text-white review-name">
+                        FirstName L.
                       </div>
-                      <div className="p-0">Flex item 1</div>
+                      <div className="p-0 ms-4 review-date">08/17/2022</div>
                     </div>
                   </div>
                 </div>
