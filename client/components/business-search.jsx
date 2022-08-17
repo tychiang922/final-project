@@ -256,6 +256,37 @@ export default class BusinessSearch extends React.Component {
             </div>
           </div>
         </div>
+        <div>
+          <h2 className='text-white fs-6 ps-2 pt-3' style={{
+            fontWeight: 'normal'
+          }}>Ratings and Reviews</h2>
+          <div className="d-flex justify-content-center">
+            <div className="card p-2" style={{
+              width: '95%',
+              backgroundColor: '#182430'
+            }}>
+              <div className="card-body py-1 px-0">
+                <p className="text-white review-text">This restaurant came highly recommended by my close friend. The wait to be seated for dinner was as expected for a Friday night. Thankfully there are many...</p>
+                <div className="d-flex flex-row mb-0 text-white">
+                  <div style={{
+                    borderRadius: '50%',
+                    height: '40px',
+                    width: '40x'
+                  }}>
+                    <img src='https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg' className='face-img' />
+                  </div>
+                  <div className="d-flex flex-column mb-0">
+                    <div className="p-0">Flex item 1</div>
+                    <div className="d-flex flex-row mb-0 text-white">
+                      <div className="p-0">Flex item 1</div>
+                      <div className="p-0">Flex item 1</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
