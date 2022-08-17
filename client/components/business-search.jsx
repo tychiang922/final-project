@@ -2,6 +2,27 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 
 export default class BusinessSearch extends React.Component {
+
+  ratingRender() {
+    const businessRating = 4.5;
+    const fullStar = Math.ceil(businessRating);
+    let halfStar = false;
+    const array = [...Array(fullStar)];
+    if (businessRating % 1 !== 0) {
+      halfStar = true;
+    }
+    return array.map((e, i) => {
+      if (i === array.length - 1) {
+        if (halfStar) {
+          halfStar = false;
+          return <i className="fa-solid fa-star-half text-danger"></i>;
+        }
+      }
+      return <i key={i} className="fa-solid fa-star text-danger"></i>;
+    });
+
+  }
+
   render() {
     // const { searchActive } = this.context;
     return (
@@ -75,9 +96,7 @@ export default class BusinessSearch extends React.Component {
             <div className="fs-title">Rating</div>
             <div className="fs-caption d-flex flex-row ">
               <p className="mb-0">4.0</p>
-              <i className="fa-solid fa-star text-danger mt-1 ms-1" style={{
-
-              }}></i>
+              <i className="fa-solid fa-star text-danger mt-1 ms-1"></i>
             </div>
           </div>
           <div className="d-flex flex-column border-end border-secondary ms-1 pe-3">
@@ -95,10 +114,10 @@ export default class BusinessSearch extends React.Component {
             }}>Delivery/Pickup</div>
           </div>
         </div>
-        <div className="d-flex flex-row mb-3">
-          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image ms-2 me-1'></img>
-          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image me-1'></img>
-          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image me-1'></img>
+        <div className="d-flex flex-row mb-3 mx-2 justify-content-between">
+          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image'></img>
+          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image'></img>
+          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image'></img>
         </div>
         <div className="d-flex justify-content-center">
           <div className="card" style={{
@@ -276,9 +295,13 @@ export default class BusinessSearch extends React.Component {
                     <img src='https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg' className='face-img' />
                   </div>
                   <div className="d-flex flex-column mb-0">
-                    <div className="p-0">Flex item 1</div>
+                    <div className="p-0">
+                      <this.ratingRender />
+                    </div>
                     <div className="d-flex flex-row mb-0 text-white">
-                      <div className="p-0">Flex item 1</div>
+                      <div className="p-0">
+
+                      </div>
                       <div className="p-0">Flex item 1</div>
                     </div>
                   </div>
