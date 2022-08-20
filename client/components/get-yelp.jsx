@@ -35,3 +35,21 @@ export function getYelpById(id) {
       });
   });
 }
+
+export function getYelpReview(id) {
+  return new Promise((resolve, reject) => {
+    fetch(`/yelp/business/review/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(result => {
+        resolve(result);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}

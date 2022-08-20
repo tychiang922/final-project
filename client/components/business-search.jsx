@@ -2,7 +2,6 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 
 export default class BusinessSearch extends React.Component {
-
   ratingRender() {
     const businessRating = 4.5;
     const fullStar = Math.ceil(businessRating);
@@ -23,7 +22,48 @@ export default class BusinessSearch extends React.Component {
   }
 
   render() {
-    // const { searchActive } = this.context;
+    const { currentSearch } = this.context;
+    let reviews;
+    if (currentSearch.length === 0) {
+      reviews = null;
+    } else {
+      reviews = currentSearch.reviews.map((e, i) => {
+        return (
+        <div key={i}>
+          <div className="pt-2 d-flex justify-content-center">
+            <div className="card p-2" style={{
+              width: '95%',
+              backgroundColor: '#182430'
+            }}>
+              <div className="card-body py-1 px-0">
+                <p className="mb-1 text-white review-text">{e.text}</p>
+                <div className="d-flex flex-row mb-0 text-white">
+                  <div style={{
+                    borderRadius: '50%',
+                    height: '40px',
+                    width: '40x'
+                  }}>
+                    <img src='https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg' className='face-img' />
+                  </div>
+                  <div className="d-flex flex-column mb-0 ms-1 mt-1">
+                    <div className="p-0">
+                      <this.ratingRender />
+                    </div>
+                    <div className="d-flex flex-row mb-0 mt-1">
+                      <div className="p-0 text-white review-name">
+                        {e.user.name}
+                      </div>
+                      <div className="p-0 ms-4 review-date">{e.time_created}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        );
+      });
+    }
     return (
       <div className="card mob-nav-pos" style={{
         width: '100%',
@@ -274,7 +314,12 @@ export default class BusinessSearch extends React.Component {
             </div>
           </div>
         </div>
-        <div>
+        <h2 className='text-white fs-6 ps-3 pt-3 mb-0' style={{
+          fontWeight: 'normal'
+        }}>Ratings and Reviews</h2>
+        {reviews}
+        {/* <this.reviewRender /> */}
+        {/* <div>
           <h2 className='text-white fs-6 ps-2 pt-3' style={{
             fontWeight: 'normal'
           }}>Ratings and Reviews</h2>
@@ -308,7 +353,7 @@ export default class BusinessSearch extends React.Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
