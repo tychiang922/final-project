@@ -2,24 +2,6 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 
 export default class BusinessSearch extends React.Component {
-  ratingRender() {
-    const businessRating = 4.5;
-    const fullStar = Math.ceil(businessRating);
-    let halfStar = false;
-    const array = [...Array(fullStar)];
-    if (businessRating % 1 !== 0) {
-      halfStar = true;
-    }
-    return array.map((e, i) => {
-      if (i === array.length - 1) {
-        if (halfStar) {
-          halfStar = false;
-          return <i className="fa-solid fa-star-half text-danger"></i>;
-        }
-      }
-      return <i key={i} className="fa-solid fa-star text-danger"></i>;
-    });
-  }
 
   render() {
     const { currentSearch } = this.context;
@@ -28,6 +10,22 @@ export default class BusinessSearch extends React.Component {
       reviews = null;
     } else {
       reviews = currentSearch.reviews.map((e, i) => {
+        const businessRating = e.rating;
+        const fullStar = Math.ceil(businessRating);
+        let halfStar = false;
+        const array = [...Array(fullStar)];
+        if (businessRating % 1 !== 0) {
+          halfStar = true;
+        }
+        const rating = array.map((e, i) => {
+          if (i === array.length - 1) {
+            if (halfStar) {
+              halfStar = false;
+              return <i className="fa-solid fa-star-half text-danger"></i>;
+            }
+          }
+          return <i key={i} className="fa-solid fa-star text-danger"></i>;
+        });
         return (
         <div key={i}>
           <div className="pt-2 d-flex justify-content-center">
@@ -43,11 +41,11 @@ export default class BusinessSearch extends React.Component {
                     height: '40px',
                     width: '40x'
                   }}>
-                    <img src='https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg' className='face-img' />
+                    <img src={e.user.image_url} className='face-img rounded-circle' />
                   </div>
                   <div className="d-flex flex-column mb-0 ms-1 mt-1">
                     <div className="p-0">
-                      <this.ratingRender />
+                      {rating};
                     </div>
                     <div className="d-flex flex-row mb-0 mt-1">
                       <div className="p-0 text-white review-name">
