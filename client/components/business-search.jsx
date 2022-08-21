@@ -2,12 +2,12 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 
 export default class BusinessSearch extends React.Component {
-
   render() {
     const { currentSearch } = this.context;
     let reviews;
     if (currentSearch.length === 0) {
       reviews = null;
+      return null;
     } else {
       reviews = currentSearch.reviews.map((e, i) => {
         const businessRating = e.rating;
@@ -87,13 +87,13 @@ export default class BusinessSearch extends React.Component {
             <div className='text-white'>
               <h1 style={{
                 fontSize: '24px'
-              }}>Store Name</h1>
+              }}>{currentSearch.name}</h1>
             </div>
             <div className='d-flex text-white'>
-              <p className='pe-2'>Category</p>
+              <p className='pe-2'>{currentSearch.categories[0].title}</p>
               <p style={{
                 color: '#066AFF'
-              }}>Location</p>
+              }}>{currentSearch.location.city}</p>
             </div>
           </div>
           <div>
@@ -126,23 +126,23 @@ export default class BusinessSearch extends React.Component {
           <div className="d-flex flex-column border-end border-secondary ms-1 pe-3">
             <div className="fs-title">Hours</div>
             <div className="fs-caption">
-              Open
+              {currentSearch.is_closed ? 'Close' : 'Open'}
             </div>
           </div>
           <div className="d-flex flex-column border-end border-secondary ms-1 pe-3">
             <div className="fs-title">Rating</div>
             <div className="fs-caption d-flex flex-row ">
-              <p className="mb-0">4.0</p>
+              <p className="mb-0">{currentSearch.rating.toFixed(1)}</p>
               <i className="fa-solid fa-star text-danger mt-1 ms-1"></i>
             </div>
           </div>
           <div className="d-flex flex-column border-end border-secondary ms-1 pe-3">
             <div className="fs-title">Review Count</div>
-            <div className="fs-caption">2852</div>
+            <div className="fs-caption">{currentSearch.review_count}</div>
           </div>
           <div className="d-flex flex-column border-end border-secondary ms-1 pe-3">
             <div className="fs-title">Price</div>
-            <div className="fs-caption">$$</div>
+            <div className="fs-caption">{currentSearch.price}</div>
           </div>
           <div className="d-flex flex-column ms-1 pe-3">
             <div className="fs-title">Transactions</div>
@@ -152,9 +152,12 @@ export default class BusinessSearch extends React.Component {
           </div>
         </div>
         <div className="d-flex flex-row mb-3 mx-2 justify-content-between">
-          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image'></img>
-          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image'></img>
-          <img src="https://image.shutterstock.com/shutterstock/photos/1811246308/display_1500/stock-vector-sample-stamp-in-rubber-style-red-round-grunge-sample-sign-rubber-stamp-on-white-vector-1811246308.jpg" className='sample-image'></img>
+          { currentSearch.photos.map((e, i) => {
+            return (
+              <img key={i} src={e} className='sample-image'></img>
+            );
+          })
+          }
         </div>
         <div className="d-flex justify-content-center">
           <div className="card" style={{
@@ -179,7 +182,7 @@ export default class BusinessSearch extends React.Component {
                 <div className="py-2 border-bottom border-secondary w-100 d-flex align-items-center" style={{
                   color: '#066AFF',
                   fontSize: '20px'
-                }}>(777)&nbsp;999-1111</div>
+                }}>{currentSearch.phone}</div>
               </div>
               <div className="d-flex flex-row mt-1 align-items-center">
                 <div className="mx-3">
