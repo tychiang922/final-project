@@ -2,6 +2,19 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 
 export default class BusinessSearch extends React.Component {
+  timeConvert(time) {
+    let t = Number(time);
+    if (t > 1200) {
+      t -= 1200;
+      if (t < 100) {
+        t += 1200;
+      }
+    }
+    const tString = t.toString();
+    const result = tString.slice(0, tString.length - 2) + ':' + tString.slice(tString.length - 2);
+    return result;
+  }
+
   render() {
     const { currentSearch } = this.context;
     let reviews;
@@ -45,7 +58,7 @@ export default class BusinessSearch extends React.Component {
                   </div>
                   <div className="d-flex flex-column mb-0 ms-1 mt-1">
                     <div className="p-0">
-                      {rating};
+                      {rating}
                     </div>
                     <div className="d-flex flex-row mb-0 mt-1">
                       <div className="p-0 text-white review-name">
@@ -198,10 +211,16 @@ export default class BusinessSearch extends React.Component {
                     }}></i>
                   </div>
                 </div>
-                <div className="py-2 w-100 d-flex align-items-center" style={{
+                <div className="py-2 w-100 d-flex flex-column" style={{
                   color: '#066AFF',
                   fontSize: '13px'
-                }}>532 Spectrum Center Dr <br /> Irvine, CA 92618</div>
+                }}>
+                  {currentSearch.location.display_address.map((e, i) => {
+                    return (
+                    <div key={i}>{e}</div>
+                    );
+                  })
+                  }</div>
               </div>
             </div>
           </div>
@@ -223,95 +242,30 @@ export default class BusinessSearch extends React.Component {
                     <div className="hours-number pe-1">10:00</div>
                     <div className="hours">PM</div>
                   </div>
-                  <div className="close">Closed</div>
+                  {currentSearch.hours[0].is_open_now
+                    ? <div className='open'>Open</div>
+                    : <div className='close'>Closed</div>}
                 </div>
               </button>
             </h2>
             <div id="flush-collapseOne" className="accordion-collapse collapse back-gray" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-              <div className="d-flex flex-row mb-1 px-3 pt-2 justify-content-between">
-                <div className="hours-number pe-1">Monday</div>
-                <div className="d-flex flex-column mb-0">
-                  <div className="d-flex flex-row">
-                    <div className="hours-number pe-1">6:00</div>
-                    <div className="hours pe-1">AM</div>
-                    <div className="hours-number pe-1">-</div>
-                    <div className="hours-number pe-1">10:00</div>
-                    <div className="hours">PM</div>
+              {currentSearch.hours[0].open.map((e, i) => {
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                return (
+                <div key={i} className="d-flex flex-row pb-1 px-3 pt-2 justify-content-between">
+                  <div className="hours-number pe-1">{days[i]}</div>
+                  <div className="d-flex flex-column mb-0">
+                    <div className="d-flex flex-row">
+                      <div className="hours-number pe-1">{this.timeConvert(e.start)}</div>
+                      <div className="hours pe-1">AM</div>
+                      <div className="hours-number pe-1">-</div>
+                      <div className="hours-number pe-1">{this.timeConvert(e.end)}</div>
+                      <div className="hours">PM</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="d-flex flex-row mb-1 px-3 pt-2 justify-content-between">
-                <div className="hours-number pe-1">Tuesday</div>
-                <div className="d-flex flex-column mb-0">
-                  <div className="d-flex flex-row">
-                    <div className="hours-number pe-1">6:00</div>
-                    <div className="hours pe-1">AM</div>
-                    <div className="hours-number pe-1">-</div>
-                    <div className="hours-number pe-1">10:00</div>
-                    <div className="hours">PM</div>
-                  </div>
-                </div>
-              </div>
-              <div className="d-flex flex-row mb-1 px-3 pt-2 justify-content-between">
-                <div className="hours-number pe-1">Wednesday</div>
-                <div className="d-flex flex-column mb-0">
-                  <div className="d-flex flex-row">
-                    <div className="hours-number pe-1">6:00</div>
-                    <div className="hours pe-1">AM</div>
-                    <div className="hours-number pe-1">-</div>
-                    <div className="hours-number pe-1">10:00</div>
-                    <div className="hours">PM</div>
-                  </div>
-                </div>
-              </div>
-              <div className="d-flex flex-row mb-1 px-3 pt-2 justify-content-between">
-                <div className="hours-number pe-1">Thursday</div>
-                <div className="d-flex flex-column mb-0">
-                  <div className="d-flex flex-row">
-                    <div className="hours-number pe-1">6:00</div>
-                    <div className="hours pe-1">AM</div>
-                    <div className="hours-number pe-1">-</div>
-                    <div className="hours-number pe-1">10:00</div>
-                    <div className="hours">PM</div>
-                  </div>
-                </div>
-              </div>
-              <div className="d-flex flex-row mb-1 px-3 pt-2 justify-content-between">
-                <div className="hours-number pe-1">Friday</div>
-                <div className="d-flex flex-column mb-0">
-                  <div className="d-flex flex-row">
-                    <div className="hours-number pe-1">6:00</div>
-                    <div className="hours pe-1">AM</div>
-                    <div className="hours-number pe-1">-</div>
-                    <div className="hours-number pe-1">10:00</div>
-                    <div className="hours">PM</div>
-                  </div>
-                </div>
-              </div>
-              <div className="d-flex flex-row mb-1 px-3 pt-2 justify-content-between">
-                <div className="hours-number pe-1">Saturday</div>
-                <div className="d-flex flex-column mb-0">
-                  <div className="d-flex flex-row">
-                    <div className="hours-number pe-1">6:00</div>
-                    <div className="hours pe-1">AM</div>
-                    <div className="hours-number pe-1">-</div>
-                    <div className="hours-number pe-1">10:00</div>
-                    <div className="hours">PM</div>
-                  </div>
-                </div>
-              </div>
-              <div className="d-flex flex-row mb-1 px-3 py-2 justify-content-between">
-                <div className="hours-number pe-1">Sunday</div>
-                <div className="d-flex flex-column mb-0">
-                  <div className="d-flex flex-row">
-                    <div className="hours-number pe-1">6:00</div>
-                    <div className="hours pe-1">AM</div>
-                    <div className="hours-number pe-1">-</div>
-                    <div className="hours-number pe-1">10:00</div>
-                    <div className="hours">PM</div>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </div>
